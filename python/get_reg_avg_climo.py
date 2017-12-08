@@ -1,10 +1,12 @@
 #
 # Copyright (c) 2017, UT-BATTELLE, LLC
 # All rights reserved.
-# 
+#
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import numpy
 from netCDF4             import Dataset
 
@@ -17,7 +19,7 @@ from aggregate_ts_weighted     import aggregate_ts_weighted
 from read_climo_file        import read_climo_file
 
 def get_reg_avg_climo (      indir,
-              casename, 
+              casename,
               field_name,
                   interp_grid,
               interp_method,

@@ -5,6 +5,8 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import numpy
 
 def get_reg_meridional_avg(field, area_wgts, debug = False):
@@ -15,7 +17,8 @@ def get_reg_meridional_avg(field, area_wgts, debug = False):
 
     meridional_avg = numpy.sum(field * area_wgts, axis = -2)/numpy.sum(area_wgts, axis = -2)
 
-    print __name__, 'meridional_avg.shape: ', meridional_avg.shape
-    if debug: print __name__, 'area weighted meridional avg.: ', meridional_avg
+    print(__name__, 'meridional_avg.shape: ', meridional_avg.shape)
+    if debug:
+        print(__name__, 'area weighted meridional avg.: ', meridional_avg)
 
     return meridional_avg

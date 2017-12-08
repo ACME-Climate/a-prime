@@ -8,6 +8,9 @@
 #python script to plot wind stress vectors and magnitude over the oceans using
 #CF variables TAUX and TAUY
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
+
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -152,9 +155,9 @@ field_Y_plot.mask = numpy.where(field_mask[:,:] < 0.5, 1, 0)
 field_XY = numpy.ma.sqrt(numpy.ma.power(field_X_plot, 2.0) + numpy.ma.power(field_Y_plot, 2.0))
 
 
-print
-print 'Reading climo file for case: ', ref_case
-print
+print()
+print('Reading climo file for case: ', ref_case)
+print()
 
 field_ref_case_X, lat, lon, area, units = read_climo_file(indir = ref_case_dir, \
                      casename = ref_case, \
@@ -207,10 +210,10 @@ field_min_TAU       = numpy.ma.min(field_XY)
 field_max_ERS_TAU = numpy.ma.max(field_ref_case_XY)
 field_min_ERS_TAU = numpy.ma.min(field_ref_case_XY)
 
-print 'mean, stddev, min_plot, max_plot: ', \
-    numpy.ma.mean(field_XY), numpy.ma.std(field_XY), min_plot, max_plot
-print 'min, max: ', field_min_TAU, field_max_TAU
-print 'levels:', levels
+print('mean, stddev, min_plot, max_plot: ',
+      numpy.ma.mean(field_XY), numpy.ma.std(field_XY), min_plot, max_plot)
+print('min, max: ', field_min_TAU, field_max_TAU)
+print('levels:', levels)
 
 
 
@@ -294,11 +297,11 @@ num         = 11
 max_plot    = round_to_first(3.0 * numpy.ma.std(field_diff_XY))
 levels_diff = numpy.linspace(-max_plot, max_plot, num = num)
 
-print 'For difference plot: '
-print 'mean, stddev, max_plot: ', \
-    numpy.ma.mean(field_diff_XY), numpy.ma.std(field_diff_XY), max_plot
-print 'min, max: ', numpy.ma.min(field_diff_XY), numpy.ma.max(field_diff_XY)
-print 'contour levels: ', levels
+print('For difference plot: ')
+print('mean, stddev, max_plot: ', numpy.ma.mean(field_diff_XY),
+      numpy.ma.std(field_diff_XY), max_plot)
+print('min, max: ', numpy.ma.min(field_diff_XY), numpy.ma.max(field_diff_XY))
+print('contour levels: ', levels)
 
 #Computing difference vectors
 field_diff_X = field_X_plot - field_ref_case_X_plot

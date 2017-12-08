@@ -1,10 +1,12 @@
 #
 # Copyright (c) 2017, UT-BATTELLE, LLC
 # All rights reserved.
-# 
+#
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import numpy
 
 def get_season_months_index(begin_month, end_month):
@@ -23,4 +25,4 @@ def get_season_months_index(begin_month, end_month):
             index_months = numpy.arange(begin_month, end_month+1)
 
 
-    return (index_months, n_months_season) 
+    return (index_months, n_months_season)

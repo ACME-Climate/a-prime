@@ -5,6 +5,9 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -58,8 +61,8 @@ def plot_regress_index_index (indir,
                debug = False):
 
 
-    print __name__, 'casename: ', casename
-    print __name__, 'field_name: ', field_name
+    print(__name__, 'casename: ', casename)
+    print(__name__, 'field_name: ', field_name)
 
     x = get_regress_index_index (indir     = indir,
                     casename     = casename,
@@ -120,7 +123,7 @@ def plot_regress_index_index (indir,
         if ref_case[k] == 'HadISST' or ref_case[k] == 'HadISST_ts' or ref_case[k] == 'HadOIBl':
             if field_name[k] == 'TS': field_name_ref[k] = 'SST'
 
-    if debug: print __name__, 'field_name_ref: ', field_name_ref
+    if debug: print(__name__, 'field_name_ref: ', field_name_ref)
 
 
     x = get_regress_index_index (      indir         = ref_case_dir,
@@ -258,8 +261,8 @@ def plot_regress_index_index (indir,
     mpl.rcParams['savefig.dpi']=300
 
 
-    print __name__, 'begin_month: ', begin_month
-    print __name__, 'end_month: ', end_month
+    print(__name__, 'begin_month: ', begin_month)
+    print(__name__, 'end_month: ', end_month)
 
     outfile = plots_dir + '/' + casename[0] + '-' + ref_case[0] + '_feedback_' \
                + field_name[0] + '_' + reg[0] + '_' + season_field + '_' \
@@ -373,7 +376,7 @@ if __name__ == "__main__":
     colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
     x = mpl.get_backend()
-    print 'backend: ', x
+    print('backend: ', x)
 
     plot_regress_index_index (indir = indir,
                    casename = casename,

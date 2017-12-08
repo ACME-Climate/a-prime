@@ -5,6 +5,9 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 from get_season_name import get_season_name
 from get_index_filename import get_index_filename
 from netCDF4 import Dataset
@@ -39,7 +42,7 @@ def read_index_file (      indir,
                                           stdize        = stdize,
                                           debug         = debug)
 
-    print __name__, 'file_name: ', file_name
+    print(__name__, 'file_name: ', file_name)
 
     #try:
     f = Dataset(file_name, "r")
@@ -48,13 +51,13 @@ def read_index_file (      indir,
     units = field.units
 
     field_in = field[:]
-    print field.shape
-    print field_in.shape
+    print(field.shape)
+    print(field_in.shape)
 
     #except:
 
     #    print
-    #        print file_name, 'not found! Exiting'
+    #        print(file_name, 'not found! Exiting'
     #    quit()
 
 

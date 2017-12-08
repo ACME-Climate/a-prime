@@ -5,6 +5,9 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -52,11 +55,11 @@ def plot_regress_lead_lag_index_field (indir,
                debug = False):
 
 
-    print __name__, 'casename: ', casename
-    print __name__, 'field_name: ', field_name
+    print(__name__, 'casename: ', casename)
+    print(__name__, 'field_name: ', field_name)
 
-    lags = range(-8, 12, 4)
-#    lags = range(-4, 4, 4)
+    lags = list(range(-8, 12, 4))
+#    lags = list(range(-4, 4, 4))
     n_lags = len(lags)
 
     for i, lag in enumerate(lags):
@@ -98,7 +101,8 @@ def plot_regress_lead_lag_index_field (indir,
         if ref_case[k] == 'HadISST' or ref_case[k] == 'HadISST_ts' or ref_case[k] == 'HadOIBl':
             if field_name[k] == 'TS': field_name_ref[k] = 'SST'
 
-    if debug: print __name__, 'field_name_ref: ', field_name_ref
+    if debug:
+        print(__name__, 'field_name_ref: ', field_name_ref)
 
 
     for i, lag in enumerate(lags):
@@ -132,8 +136,10 @@ def plot_regress_lead_lag_index_field (indir,
         ref_plot_field = ref_regr_matrix_lag
         ref_plot_t_test = ref_t_test_matrix_lag
 
-        if debug: print __name__, 'plot_field: ', plot_field
-        if debug: print __name__, 'ref_plot_field: ', ref_plot_field
+        if debug:
+            print(__name__, 'plot_field: ', plot_field)
+        if debug:
+            print(__name__, 'ref_plot_field: ', ref_plot_field)
 
     season_field = get_season_name(begin_month[0], end_month[0])
     season_index = get_season_name(begin_month[1], end_month[1])
@@ -148,17 +154,19 @@ def plot_regress_lead_lag_index_field (indir,
     max_plot = round_to_first(5.0 * numpy.nanstd(ref_plot_field))
     levels      = numpy.linspace(-max_plot, max_plot, num = num)
 
-    print
-    print 'plot_field - mean, stddev: ', \
-        numpy.nanmean(plot_field), numpy.nanstd(plot_field)
-    print 'plot_field - min, max: ', numpy.ma.min(plot_field), numpy.ma.max(plot_field)
+    print()
+    print('plot_field - mean, stddev: ', numpy.nanmean(plot_field),
+          numpy.nanstd(plot_field))
+    print('plot_field - min, max: ', numpy.ma.min(plot_field),
+          numpy.ma.max(plot_field))
 
-    print 'ref_plot_field - mean, stddev: ', \
-        numpy.nanmean(ref_plot_field), numpy.nanstd(ref_plot_field)
-    print 'ref_plot_field - min, max: ', numpy.nanmin(plot_field), numpy.nanmax(plot_field)
+    print('ref_plot_field - mean, stddev: ', numpy.nanmean(ref_plot_field),
+          numpy.nanstd(ref_plot_field))
+    print('ref_plot_field - min, max: ', numpy.nanmin(plot_field),
+          numpy.nanmax(plot_field))
 
-    print 'max_plot: ', max_plot
-    print 'contour levels: ', levels
+    print('max_plot: ', max_plot)
+    print('contour levels: ', levels)
 
 
     #PLOT REGRESSIONS
@@ -240,8 +248,8 @@ def plot_regress_lead_lag_index_field (indir,
     mpl.rcParams['savefig.dpi']=300
 
 
-    print __name__, 'begin_month: ', begin_month
-    print __name__, 'end_month: ', end_month
+    print(__name__, 'begin_month: ', begin_month)
+    print(__name__, 'end_month: ', end_month)
 
     outfile = plots_dir + '/' + casename[0] + '_ENSO_evolution_regr_' \
                + field_name[0] + '_' + reg[0] + '_' + season_field + '_' \
@@ -329,8 +337,8 @@ def plot_regress_lead_lag_index_field (indir,
     mpl.rcParams['savefig.dpi']=300
 
 
-    print __name__, 'begin_month: ', begin_month
-    print __name__, 'end_month: ', end_month
+    print(__name__, 'begin_month: ', begin_month)
+    print(__name__, 'end_month: ', end_month)
 
     outfile = plots_dir + '/' + casename[0] + '_ENSO_evolution_corr_' \
                + field_name[0] + '_' + reg[0] + '_' + season_field + '_' \
@@ -436,7 +444,7 @@ if __name__ == "__main__":
     colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
     x = mpl.get_backend()
-    print 'backend: ', x
+    print('backend: ', x)
 
     plot_regress_lead_lag_index_field (indir = indir,
                    casename = casename,

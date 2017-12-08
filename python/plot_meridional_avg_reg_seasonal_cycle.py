@@ -7,6 +7,8 @@
 #
 #Not ready yet (07/18/2017: Salil)
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 
 
@@ -52,7 +54,7 @@ def plot_meridional_avg_reg_seasonal_cycle(indir,
                debug = False):
 
 
-    print __name__, 'casename: ', casename
+    print(__name__, 'casename: ', casename)
 
     for month in range(0, 11):
         meridional_avg, lon_reg, units = get_reg_meridional_avg_climo (
@@ -98,9 +100,11 @@ def plot_meridional_avg_reg_seasonal_cycle(indir,
         ref_meridional_avg_all_months[:, month] = ref_meridional_avg
 
 
-    if debug: print __name__, 'ref_plot_field.shape ', ref_plot_field.shape
+    if debug:
+        print(__name__, 'ref_plot_field.shape ', ref_plot_field.shape)
 
-    if debug: print __name__, 'plot_field: ', plot_field
+    if debug:
+        print(__name__, 'plot_field: ', plot_field)
 
     season = get_season_name(begin_month, end_month)
 
@@ -243,7 +247,7 @@ if __name__ == "__main__":
     colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
     x = mpl.get_backend()
-    print 'backend: ', x
+    print('backend: ', x)
 
     plot_meridional_avg_climo(indir = indir,
                               casename = casename,

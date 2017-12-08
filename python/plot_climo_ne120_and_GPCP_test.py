@@ -6,6 +6,9 @@
 # in the LICENSE file in the top level a-prime directory
 #
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
+
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -67,7 +70,7 @@ if field_name == 'PRECT':
                 '.climo.' + str(begin_month) + '_' + str(end_month) + \
                 '.GPCP_conservative_mapping.' + 'PRECC.nc'
 
-    print "file_name: ", file_name_PRECC
+    print("file_name: ", file_name_PRECC)
 
 
     f_PRECC = Dataset(file_name_PRECC, "r")
@@ -82,7 +85,7 @@ if field_name == 'PRECT':
                 '.climo.' + str(begin_month) + '_' + str(end_month) + \
                 '.GPCP_conservative_mapping.' + 'PRECL.nc'
 
-    print "file_name: ", file_name_PRECL
+    print("file_name: ", file_name_PRECL)
 
 
     f_PRECL = Dataset(file_name_PRECL, "r")
@@ -97,7 +100,7 @@ else:
                 '.climo.' + str(begin_month) + '_' + str(end_month) + \
             '.GPCP_conservative_mapping.' + field_name + '.nc'
 
-    print "file_name: ", file_name
+    print("file_name: ", file_name)
 
 
     f = Dataset(file_name, "r")
@@ -108,14 +111,14 @@ else:
     lon = f.variables['lon']
     units = field.units
 
-print 'field.shape: ', field.shape
+print('field.shape: ', field.shape)
 
 
 season = get_season_name(begin_month, end_month)
 
 file_GPCP = GPCP_dir + '/' + 'GPCP_' + season + '_climo.nc'
 
-print "Using GPCP file: ", file_GPCP
+print("Using GPCP file: ", file_GPCP)
 
 f_GPCP = Dataset(file_GPCP, "r")
 

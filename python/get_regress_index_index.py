@@ -5,6 +5,8 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import numpy
 from scipy import stats
 from netCDF4 import Dataset
@@ -40,7 +42,7 @@ def get_regress_index_index (indir,
                debug = False):
 
 
-    print __name__, 'casename: ', casename
+    print(__name__, 'casename: ', casename)
 
     index, n_months_season, units_index = get_reg_seasonal_avg (
                               indir         = indir[1],
@@ -88,7 +90,8 @@ def get_regress_index_index (indir,
     if aggregate == 1:
 
         day_wgts = get_days_in_season_months(begin_month[0], end_month[0])
-        if debug: print __name__, 'day_wgts: ', day_wgts
+        if debug:
+            print(__name__, 'day_wgts: ', day_wgts)
 
         field_seasonal_avg = aggregate_time_series_data(field, n_months_season, day_wgts)
 

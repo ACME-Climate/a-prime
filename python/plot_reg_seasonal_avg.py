@@ -6,6 +6,8 @@
 # in the LICENSE file in the top level a-prime directory
 #
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -48,7 +50,7 @@ def plot_reg_seasonal_avg (casename,
                   aggregate = aggregate,
                   debug = debug)
 
-    print __name__, 'area_seasonal_avg.shape', area_seasonal_avg.shape
+    print(__name__, 'area_seasonal_avg.shape', area_seasonal_avg.shape)
 
     #plt.subplot(3,1,1)
 

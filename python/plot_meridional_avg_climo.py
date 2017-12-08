@@ -5,6 +5,8 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -49,7 +51,7 @@ def plot_meridional_avg_climo (indir,
                debug = False):
 
 
-    print __name__, 'casename: ', casename
+    print(__name__, 'casename: ', casename)
     meridional_avg, lon_reg, units = get_reg_meridional_avg_climo (
                               indir     = indir,
                               casename     = casename,
@@ -92,9 +94,11 @@ def plot_meridional_avg_climo (indir,
 
     ref_plot_field = ref_meridional_avg
 
-    if debug: print __name__, 'ref_plot_field.shape ', ref_plot_field.shape
+    if debug:
+        print(__name__, 'ref_plot_field.shape ', ref_plot_field.shape)
 
-    if debug: print __name__, 'plot_field: ', plot_field
+    if debug:
+        print(__name__, 'plot_field: ', plot_field)
 
     plot_field_mean = numpy.mean(plot_field, axis = 0)
     ref_plot_field_mean = numpy.mean(ref_plot_field, axis = 0)
@@ -125,11 +129,11 @@ def plot_meridional_avg_climo (indir,
 
     ax.axis([lon_reg[0],lon_reg[-1], y_axis_ll, y_axis_ul])
 
-    print 'lon_reg[0],lon_reg[-1], 1.1*min_plot, 1.1*max_plot: ', \
-        lon_reg[0],lon_reg[-1], 1.1*min_plot, 1.1*max_plot
+    print('lon_reg[0],lon_reg[-1], 1.1*min_plot, 1.1*max_plot: ',
+          lon_reg[0],lon_reg[-1], 1.1*min_plot, 1.1*max_plot)
 
-    print 'lon_reg.shape, plot_field.shape, ref_plot_field.shape: ', \
-        lon_reg.shape, plot_field.shape, ref_plot_field.shape
+    print('lon_reg.shape, plot_field.shape, ref_plot_field.shape: ',
+          lon_reg.shape, plot_field.shape, ref_plot_field.shape)
 
     test_line, = ax.plot(lon_reg, plot_field, color = 'green', linewidth = 2.0, label = casename)
     ref_line, = ax.plot(lon_reg, ref_plot_field, color = 'black', linewidth = 2.0, label = ref_case)
@@ -139,7 +143,7 @@ def plot_meridional_avg_climo (indir,
     ax.set_title(field_name, fontsize = 12)
 
     #ax.get_yaxis().get_major_formatter().set_useOffset(False)
-    print __name__, 'levels:', levels
+    print(__name__, 'levels:', levels)
     ax.yaxis.set_major_locator(FixedLocator(levels))
 
     for tick in ax.yaxis.get_major_ticks():
@@ -239,7 +243,7 @@ if __name__ == "__main__":
     colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
     x = mpl.get_backend()
-    print 'backend: ', x
+    print('backend: ', x)
 
     plot_meridional_avg_climo(indir = indir,
                               casename = casename,

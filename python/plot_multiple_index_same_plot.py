@@ -6,6 +6,8 @@
 # in the LICENSE file in the top level a-prime directory
 #
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -57,7 +59,7 @@ def plot_multiple_index_same_plot   (indir,
     n_index = len(index_names)
 
     for i,index_name in enumerate(index_names):
-        print __name__, 'casename: ', casename
+        print(__name__, 'casename: ', casename)
         index_temp, units = read_index_file (
                                   indir     = indir[i],
                                   casename     = casename[i],
@@ -79,12 +81,12 @@ def plot_multiple_index_same_plot   (indir,
         test_plot_ts[i, :] = index_temp
 
 
-        if debug: print __name__, 'test_plot_ts: ', test_plot_ts
+        if debug: print(__name__, 'test_plot_ts: ', test_plot_ts)
 
     test_corr_matrix = numpy.corrcoef(test_plot_ts)
 
     for i,index_name in enumerate(index_names):
-        print __name__, 'casename: ', casename
+        print(__name__, 'casename: ', casename)
         index_temp, units = read_index_file (
                               indir     = ref_case_dir[i],
                               casename     = ref_case[i],
@@ -106,7 +108,7 @@ def plot_multiple_index_same_plot   (indir,
         ref_plot_ts[i, :] = index_temp
 
 
-        if debug: print __name__, 'ref_plot_ts: ', ref_plot_ts
+        if debug: print(__name__, 'ref_plot_ts: ', ref_plot_ts)
 
     ref_corr_matrix = numpy.corrcoef(ref_plot_ts)
 
@@ -141,8 +143,8 @@ def plot_multiple_index_same_plot   (indir,
         else:
             plot_time = numpy.arange(0,nt)
 
-        if debug: print __name__, 'plot_time: ', plot_time
-        if debug: print __name__, 'plot_begin_yr: ', plot_begin_yr
+        if debug: print(__name__, 'plot_time: ', plot_time)
+        if debug: print(__name__, 'plot_begin_yr: ', plot_begin_yr)
 
         plot_ts_mean   = numpy.mean(plot_ts, axis = 1)
         plot_ts_stddev = numpy.std(plot_ts, axis = 1)
@@ -156,21 +158,21 @@ def plot_multiple_index_same_plot   (indir,
 
             ax[i, k].axis([plot_time[0],plot_time[-1], y_axis_ll, y_axis_ul])
 
-            print 'plot_time[0],plot_time[-1], 1.1*min_plot, 1.1*max_plot: ', \
-                plot_time[0],plot_time[-1], 1.1*min_plot, 1.1*max_plot
+            print('plot_time[0],plot_time[-1], 1.1*min_plot, 1.1*max_plot: ',
+                  plot_time[0],plot_time[-1], 1.1*min_plot, 1.1*max_plot)
 
             mean_line_plot = numpy.zeros(nt) + plot_ts_mean[i]
             mean_line, = ax[i, k].plot(plot_time, mean_line_plot, color = 'black', linewidth = 1.0, label = 'Mean')
 
             if begin_month == 0 and end_month == 11 and aggregate[i] == 0:
                 bw   = 13
-                wgts = numpy.ones(bw)/bw
-                nyrs = nt/n_months_season
+                wgts = numpy.ones(bw) // bw
+                nyrs = nt // n_months_season
 
 
                 plot_ts_moving_avg = numpy.convolve(plot_ts[i, :], wgts, 'valid')
 
-                smooth_line, = ax[i, k].plot(plot_time[bw/2:-bw/2+1], plot_ts_moving_avg,
+                smooth_line, = ax[i, k].plot(plot_time[bw // 2:-bw // 2+1], plot_ts_moving_avg,
                                 color = colors[i],
                                 linewidth = 2.0,
                                 label = 'Moving avg. (Bandwidth = ' + "%3d" % bw + ' months)')
@@ -205,7 +207,7 @@ def plot_multiple_index_same_plot   (indir,
                 if name != name_corr:
                     corr_text = 'Corr (' + name + ', ' + index_names[j] + '): ' + corr_str[j] + ' \n'
 
-            print __name__, 'corr_text: ', corr_text
+            print(__name__, 'corr_text: ', corr_text)
 
             ax[i, k].text(0.05, 0.90, corr_text, ha='left', \
                                                 fontsize = 8, transform=ax[i, k].transAxes)
@@ -240,7 +242,7 @@ def plot_multiple_index_same_plot   (indir,
 
     outfile = plots_dir + '/' + casename[0] + '_' + season + '_' + index_names_text + '.png'
 
-    print __name__, 'Plot file: ', outfile
+    print(__name__, 'Plot file: ', outfile)
 
     plt.savefig(outfile)
     #plt.show()
@@ -341,7 +343,7 @@ if __name__ == "__main__":
     colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
     x = mpl.get_backend()
-    print 'backend: ', x
+    print('backend: ', x)
 
     plot_multiple_index_same_plot(indir = indir,
                                   casename = casename,

@@ -6,6 +6,8 @@
 # in the LICENSE file in the top level a-prime directory
 #
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -106,9 +108,9 @@ debug            = options.debug
 #Get filename
 season = get_season_name(begin_month, end_month)
 
-print
-print 'Computing climo and inter-annual std. dev. for case: ', casename
-print
+print()
+print('Computing climo and inter-annual std. dev. for case: ', casename)
+print()
 
 field_mean, field_stddev, lat, lon, units = compute_reg_seasonal_climo_and_stddev(
                                 indir = indir,
@@ -151,7 +153,7 @@ ref_field_mean, ref_field_stddev, lat, lon, units = compute_reg_seasonal_climo_a
 #                     reg = 'global')
 #
 #print
-#print 'Reading climo file for case: ', ref_case
+#print('Reading climo file for case: ', ref_case
 #print
 #
 #field_ref_case, lat, lon, area, units = read_climo_file(indir = ref_case_dir, \
@@ -332,12 +334,12 @@ plt.subplots_adjust(hspace=0.25)
 #max_plot    = round_to_first(4.0 * numpy.ma.std(field_diff))
 #levels_diff = numpy.linspace(-max_plot, max_plot, num = num)
 #
-#print
-#print 'For difference plot: '
-#print 'mean, stddev, max_plot: ', \
-#        numpy.ma.mean(field_diff), numpy.ma.std(field_diff), max_plot
-#print 'min, max: ', numpy.ma.min(field_diff), numpy.ma.max(field_diff)
-#print 'contour levels: ', levels_diff
+#print()
+#print('For difference plot: ')
+#print('mean, stddev, max_plot: ',
+#      numpy.ma.mean(field_diff), numpy.ma.std(field_diff), max_plot)
+#print('min, max: ', numpy.ma.min(field_diff), numpy.ma.max(field_diff))
+#print('contour levels: ', levels_diff)
 #
 ##Plot difference plot
 #ax = f.add_subplot(3,1,3)

@@ -5,6 +5,9 @@
 # This software is released under the BSD license detailed
 # in the LICENSE file in the top level a-prime directory
 #
+
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
 from netCDF4 import Dataset
 from get_reg_box import get_reg_box
 from get_climo_filename import get_climo_filename
@@ -53,16 +56,17 @@ def read_climo_file (indir, \
 
     except:
 
-        print
-        print file_name, 'not found! Checking derived variables list for ', field_name
+        print()
+        print(file_name, 'not found! Checking derived variables list for ',
+              field_name)
 
         var_expr, var_expr_numpy = get_derived_var_expr(field_name)
 
         for i, field_name_temp in enumerate(var_expr.atoms(Symbol)):
 
-            print field_name_temp
+            print(field_name_temp)
             field_name_temp_str = str(field_name_temp)
-            print field_name_temp_str
+            print(field_name_temp_str)
 
             file_name_temp = get_climo_filename(     indir,
                                 casename,
@@ -77,7 +81,7 @@ def read_climo_file (indir, \
 
             field_temp = f.variables[field_name_temp_str]
 
-            print 'field_temp.shape: ', field_temp.shape
+            print('field_temp.shape: ', field_temp.shape)
 
             if i == 0:
                 field_list = [field_temp[:]]
@@ -95,14 +99,14 @@ def read_climo_file (indir, \
 
             f.close()
 
-        print
-        print 'field_list length: ', len(field_list)
+        print()
+        print('field_list length: ', len(field_list))
 
         field = var_expr_numpy(*field_list)
-        print __name__, 'field.shape: ', field.shape
+        print(__name__, 'field.shape: ', field.shape)
 
-    print __name__, 'field.shape: ', field.shape
-    print field
+    print(__name__, 'field.shape: ', field.shape)
+    print(field)
 
 
     nlon = lon.shape[0]
@@ -112,7 +116,7 @@ def read_climo_file (indir, \
     #Getting area tile from gw if "area" is not available in the climo file
 
     if 'gw' in locals():
-        print __name__, 'Computing area weights from gw'
+        print(__name__, 'Computing area weights from gw')
 
         area_tile = numpy.tile(gw[:], (nlon))
         area_transpose = numpy.reshape(area_tile, (nlon, nlat))
@@ -124,10 +128,11 @@ def read_climo_file (indir, \
 
     lat_ll, lat_ul, lon_ll, lon_ul = get_reg_box(reg)
 
-    print
-    print __name__, 'lat_ll, lat_ul, lon_ll, lon_ul: ', lat_ll, lat_ul, lon_ll, lon_ul
-    print __name__, 'lat: ', lat
-    print __name__, 'type(lat[:]): ', type(lat[:])
+    print()
+    print(__name__, 'lat_ll, lat_ul, lon_ll, lon_ul: ', lat_ll, lat_ul, lon_ll,
+          lon_ul)
+    print(__name__, 'lat: ', lat)
+    print(__name__, 'type(lat[:]): ', type(lat[:]))
 
     lat_reg_boolean = numpy.logical_and(lat[:]>=lat_ll, lat[:]<=lat_ul)
     lat_index_reg   = numpy.asarray(numpy.where(lat_reg_boolean))[0, :]
@@ -148,13 +153,13 @@ def read_climo_file (indir, \
     #lon_index = numpy.arange(0,nlon)
     #lon_index_reg = lon_index[lon_reg_boolean]
 
-    if debug: print
-    if debug: print __name__, 'lat_reg: ', lat_reg_boolean
-    if debug: print __name__, 'lon_reg: ', lon_reg_boolean
-    if debug: print __name__, 'lat_index_reg.shape: ', lat_index_reg.shape
-    if debug: print __name__, 'lat_index_reg: ', lat_index_reg
-    if debug: print __name__, 'lon_index_reg: ', lon_index_reg
-    if debug: print __name__, 'type(field): ', type(field)
+    if debug: print()
+    if debug: print(__name__, 'lat_reg: ', lat_reg_boolean)
+    if debug: print(__name__, 'lon_reg: ', lon_reg_boolean)
+    if debug: print(__name__, 'lat_index_reg.shape: ', lat_index_reg.shape)
+    if debug: print(__name__, 'lat_index_reg: ', lat_index_reg)
+    if debug: print(__name__, 'lon_index_reg: ', lon_index_reg)
+    if debug: print(__name__, 'type(field): ', type(field))
 
     #Mulitdimensional indexing with numpy require indexes to be multidimensional arrays
     #Used here only for derived variables like RESTOM
@@ -182,25 +187,26 @@ def read_climo_file (indir, \
         area_reg = area[lat_index_reg,lon_index_reg]
 
 
-    print __name__, "field_in.shape: ", field_in.shape
+    print(__name__, "field_in.shape: ", field_in.shape)
 
     if field_name[0:4] == 'PREC' and units == 'm/s':
-        print 'A precipitation field in m/s units! Changing units from m/s to mm/day!...'
+        print('A precipitation field in m/s units! Changing units from m/s to '
+              'mm/day!...')
         field_in = field_in * 86400.0 * 1000.0
         units = 'mm/day'
 
     if field_name[0:2] == 'TS' and units == 'K':
-        print 'A temperature field in K units! Changing units from K to C!...'
+        print('A temperature field in K units! Changing units from K to C!...')
         field_in = field_in - 273.15
         units = 'C'
 
     if field_name[0:3] == 'SST' and units == 'K':
-        print 'A temperature field in K units! Changing units from K to C!...'
+        print('A temperature field in K units! Changing units from K to C!...')
         field_in = field_in - 273.15
         units = 'C'
 
     if field_name[0:3] == 'TAU' and casename != 'ERS':
-        print 'Flipping sign of atm model wind stress values ...'
+        print('Flipping sign of atm model wind stress values ...')
         field_in = -field_in
 
     return field_in, lat_reg, lon_reg, area_reg, units

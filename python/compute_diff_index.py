@@ -6,6 +6,9 @@
 # in the LICENSE file in the top level a-prime directory
 #
 
+from __future__ import absolute_import, division, print_function, \
+    unicode_literals
+
 import matplotlib as mpl
 #changing the default backend to agg to resolve contouring issue on rhea
 mpl.use('Agg')
@@ -54,7 +57,7 @@ def compute_diff_index   (archive_dir,
     n_reg = len(regs)
 
     for i,reg in enumerate(regs):
-        print __name__, 'casename: ', casename
+        print(__name__, 'casename: ', casename)
         area_seasonal_avg, n_months_season, units = get_reg_seasonal_avg (
                                   indir     = archive_dir,
                                   casename     = casename,
@@ -83,7 +86,8 @@ def compute_diff_index   (archive_dir,
             units = 'unitless'
 
 
-        if debug: print __name__, 'test_ts: ', test_ts
+        if debug:
+            print(__name__, 'test_ts: ', test_ts)
 
 
     index = test_ts[0, :] - test_ts[-1, :]
@@ -114,8 +118,8 @@ def compute_diff_index   (archive_dir,
                       debug         = debug)
 
 
-    print "Writing ", outfile
-    print ""
+    print("Writing ", outfile)
+    print("")
 
     f_write = Dataset(outfile, 'w', format = 'NETCDF4')
 
@@ -215,7 +219,7 @@ if __name__ == "__main__":
     colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
     x = mpl.get_backend()
-    print 'backend: ', x
+    print('backend: ', x)
 
     compute_diff_index(archive_dir = archive_dir,
                        indir = indir,
