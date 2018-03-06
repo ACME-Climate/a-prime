@@ -1,0 +1,35 @@
+{% set version = "1.1" %}
+
+package:
+    name: a-prime
+    version: {{ version }}
+
+source:
+    path: ../..
+
+build:
+    number: 0
+
+requirements:
+    build:
+        - python
+    run:
+        - python
+        - mpas_analysis ==0.7.0
+        - nco >=4.7.0
+        - numpy
+        - scipy
+        - matplotlib
+        - sympy
+        - netCDF4
+
+about:
+    home:  https://github.com/ACME-Climate/a-prime
+
+extra:
+    recipe-maintainers:
+        - xylar
+        - milenaveneziani
+        - salilmahajan
+        - kevans32
+

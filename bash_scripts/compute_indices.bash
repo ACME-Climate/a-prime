@@ -58,7 +58,7 @@ for ((i=0; i<$n_index; i++)); do
                 interp_method=0
 	fi
 
-	python python/compute_index.py -d True --archive_dir $archive_dir \
+	python ${coupled_diags_home}/python/compute_index.py -d True --archive_dir $archive_dir \
 							--indir $scratch_dir \
 							-c $case \
 							-f $field_name \

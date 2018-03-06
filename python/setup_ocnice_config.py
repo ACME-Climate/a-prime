@@ -68,6 +68,8 @@ add_config_option(config, 'input', 'mpasMeshName',
                   os.environ['test_mpas_mesh_name'])
 add_config_option(config, 'input', 'autocloseFileLimitFraction',
                   os.environ['mpasAutocloseFileLimitFraction'])
+add_config_option(config, 'input', 'mpasMappingDirectory',
+                  os.environ['mpas_remapdir'])
 
 add_config_option(config, 'output', 'baseDirectory',
                   os.environ['output_base_dir'])
@@ -88,7 +90,9 @@ add_config_option(config, 'output', 'timeSeriesSubdirectory',
 
 generate = []
 if check_env('generate_ohc_trends'):
-    generate.append('timeSeriesOHC')
+    generate.append('timeSeriesOHCAnomaly')
+    generate.append('timeSeriesTemperatureAnomaly')
+    generate.append('timeSeriesSalinityAnomaly')
 if check_env('generate_sst_trends'):
     generate.append('timeSeriesSST')
 if check_env('generate_nino34'):
@@ -120,8 +124,6 @@ add_config_option(config, 'climatology', 'startYear',
                   os.environ['test_begin_yr_climo'])
 add_config_option(config, 'climatology', 'endYear',
                   os.environ['test_end_yr_climo'])
-add_config_option(config, 'climatology', 'mpasMappingFile',
-                  os.environ['mpas_remapfile'])
 
 add_config_option(config, 'timeSeries', 'startYear',
                   os.environ['test_begin_yr_ts'])
@@ -157,8 +159,8 @@ add_config_option(config, 'seaIceObservations', 'regriddedClimSubdirectory',
 add_config_option(config, 'seaIcePreprocessedReference', 'baseDirectory',
                   os.environ['ref_archive_v0_seaicedir'])
 
-add_config_option(config, 'streamfunctionMOC', 'regionMaskFiles',
-                  os.environ['mpaso_regions_file'])
+add_config_option(config, 'regions', 'regionMaskDirectory',
+                  os.environ['mpaso_regions_dir'])
 
 if check_env('run_batch_script'):
     add_config_option(config, 'execute', 'parallelTaskCount',

@@ -21,10 +21,10 @@ cd $PBS_O_WORKDIR
 # prefix to run a serial job on a single node on edison
 export command_prefix="aprun -b -N 1 -n 1"
 
-./bash_scripts/aprime_ocnice_diags.bash
+${coupled_diags_home}/bash_scripts/aprime_ocnice_diags.bash
 
 echo
 echo "**** The following batch job will be submitted to cp files to www_dir *if* the ocn/ice diags are completed"
 echo "**** jobID:"
-batch_script="./bash_scripts/batch_update_wwwdir.$machname.bash"
+batch_script="${coupled_diags_home}/bash_scripts/batch_update_wwwdir.$machname.bash"
 qsub -W depend=afterok:$PBS_JOBID $batch_script

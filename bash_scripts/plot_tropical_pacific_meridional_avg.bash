@@ -57,7 +57,7 @@ while [ $k -lt $n_var ]; do
                 end_month=${end_month_set[$i]}
                 season_name=${season_name_set[$i]}
 
-		python python/plot_meridional_avg_climo.py -d True --indir $scratch_dir \
+		python ${coupled_diags_home}/python/plot_meridional_avg_climo.py -d True --indir $scratch_dir \
 								-c $casename \
 								-f $var \
 								--begin_yr $begin_yr \

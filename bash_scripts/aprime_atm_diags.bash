@@ -59,14 +59,14 @@ echo
 
 # Ensuring a unique set of fields to compute climatology to reduce redundancy in climatology computations
 if [ "$ref_case" == "obs" ]; then
-  var_list_file="./bash_scripts/var_list_climo_model_vs_obs.bash"
+  var_list_file="${coupled_diags_home}/bash_scripts/var_list_climo_model_vs_obs.bash"
 else
-  var_list_file="./bash_scripts/var_list_climo_model_vs_model.bash"
+  var_list_file="${coupled_diags_home}/bash_scripts/var_list_climo_model_vs_model.bash"
 fi
 
 compute_climo_var_list_file="$log_dir/var_list_compute_climo.bash"
 
-./bash_scripts/generate_unique_field_list.bash $var_list_file \
+${coupled_diags_home}/bash_scripts/generate_unique_field_list.bash $var_list_file \
 	   			               $compute_climo_var_list_file
 
 # Condense climatology fields into individual files
@@ -119,7 +119,7 @@ while [ $j -lt $n_cases ]; do
    fi
 
    if [ $condense_field_climo -eq 1 ] && [ $compute_climo -eq 1 ]; then
-     ./bash_scripts/condense_field_bundle.bash $archive_dir_atm \
+     ${coupled_diags_home}/bash_scripts/condense_field_bundle.bash $archive_dir_atm \
 					       $scratch_dir \
 					       $casename \
 					       $begin_yr_climo \
@@ -149,7 +149,7 @@ while [ $j -lt $n_cases ]; do
      echo "Computing seasonal climatology for $casename"
      echo "Log files in $log_dir/climo_$casename..."
      echo
-     ./bash_scripts/compute_climo.bash $scratch_dir \
+     ${coupled_diags_home}/bash_scripts/compute_climo.bash $scratch_dir \
 				       $casename \
 				       $compute_climo_var_list_file \
 				       $begin_yr_climo \
@@ -178,7 +178,7 @@ while [ $j -lt $n_cases ]; do
      echo "Remapping seasonal climatology files for $casename" 
      echo "Log files in $log_dir/remap_climo_$casename..."
      echo
-     ./bash_scripts/remap_climo_nco.bash $scratch_dir \
+     ${coupled_diags_home}/bash_scripts/remap_climo_nco.bash $scratch_dir \
 				         $casename \
 				         $begin_yr_climo \
 		  		         $end_yr_climo \
@@ -221,7 +221,7 @@ while [ $j -lt $n_test_cases ]; do
    end_yr_climo=${end_yr_climo_set[$j]}
 
 
-   ./bash_scripts/plot_climo.bash $scratch_dir \
+   ${coupled_diags_home}/bash_scripts/plot_climo.bash $scratch_dir \
 		 	          $casename \
 			          $begin_yr_climo \
 			          $end_yr_climo \
@@ -238,14 +238,14 @@ done
 
 # Ensuring a unique set of fields to condense for time series
 if [ "$ref_case" == "obs" ]; then
-  var_list_file="./bash_scripts/var_list_time_series_model_vs_obs.bash"
+  var_list_file="${coupled_diags_home}/bash_scripts/var_list_time_series_model_vs_obs.bash"
 else
-  var_list_file="./bash_scripts/var_list_time_series_model_vs_model.bash"
+  var_list_file="${coupled_diags_home}/bash_scripts/var_list_time_series_model_vs_model.bash"
 fi
 
 ts_var_list_file="$log_dir/ts_var_list.bash"
 
-./bash_scripts/generate_unique_field_list.bash $var_list_file \
+${coupled_diags_home}/bash_scripts/generate_unique_field_list.bash $var_list_file \
 				               $ts_var_list_file
 
 # Condense time series variables into individual files
@@ -284,7 +284,7 @@ while [ $j -lt $n_cases ]; do
    fi
 
    if [ $condense_field_ts -eq 1 ]; then
-     ./bash_scripts/condense_field_bundle.bash $archive_dir_atm \
+     ${coupled_diags_home}/bash_scripts/condense_field_bundle.bash $archive_dir_atm \
 					       $scratch_dir \
 					       $casename \
 					       $begin_yr_ts \
@@ -313,7 +313,7 @@ while [ $j -lt $n_cases ]; do
      echo "Interpolating time series files for $casename"
      echo "Log files in $log_dir/remap_time_series_${casename}..."
      echo
-     ./bash_scripts/remap_time_series_nco.bash $scratch_dir \
+     ${coupled_diags_home}/bash_scripts/remap_time_series_nco.bash $scratch_dir \
 					       $casename \
 					       $begin_yr_ts \
 					       $end_yr_ts \
@@ -349,7 +349,7 @@ while [ $j -lt $n_test_cases ]; do
    begin_yr_ts=${begin_yr_ts_set[$j]}
    end_yr_ts=${end_yr_ts_set[$j]}
 
-   ./bash_scripts/plot_time_series.bash $scratch_dir \
+   ${coupled_diags_home}/bash_scripts/plot_time_series.bash $scratch_dir \
 				        $casename \
 				        $begin_yr_ts \
 				        $end_yr_ts \
@@ -374,11 +374,11 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Computing climatology based ENSO diagnostics - meridional avg. over the Tropical Pacific - ...
         echo
 
-        var_list_file=bash_scripts/var_list_enso_diags_climo.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_climo.bash
 
         ts_var_list_file=$log_dir/ts_var_list.bash
 
-        bash_scripts/generate_unique_field_list.bash $var_list_file \
+        ${coupled_diags_home}/bash_scripts/generate_unique_field_list.bash $var_list_file \
                                                    $ts_var_list_file
 
         #Condense enso diags climo variables into individual files
@@ -401,7 +401,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 fi
 
                 if [ $condense_field_climo -eq 1 ]; then
-                        bash_scripts/condense_field_bundle.bash $archive_dir_atm \
+                        ${coupled_diags_home}/bash_scripts/condense_field_bundle.bash $archive_dir_atm \
                                                                 $scratch_dir \
                                                                 $casename \
                                                                 $begin_yr_climo \
@@ -431,7 +431,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
 	     echo "Computing seasonal climatology for $casename"
 	     echo "Log files in $log_dir/climo_$casename..."
 	     echo
-	     ./bash_scripts/compute_climo.bash $scratch_dir \
+	     ${coupled_diags_home}/bash_scripts/compute_climo.bash $scratch_dir \
 					       $casename \
 					       $ts_var_list_file \
 					       $begin_yr_climo \
@@ -460,7 +460,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
 	     echo "Remapping seasonal climatology files for $casename" 
 	     echo "Log files in $log_dir/remap_climo_$casename..."
 	     echo
-	     ./bash_scripts/remap_climo_nco.bash $scratch_dir \
+	     ${coupled_diags_home}/bash_scripts/remap_climo_nco.bash $scratch_dir \
 						 $casename \
 						 $begin_yr_climo \
 						 $end_yr_climo \
@@ -498,7 +498,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 begin_yr_climo=${begin_yr_climateIndex_set[$j]}
                 end_yr_climo=${end_yr_climateIndex_set[$j]}
 
-                bash_scripts/plot_tropical_pacific_meridional_avg.bash \
+                ${coupled_diags_home}/bash_scripts/plot_tropical_pacific_meridional_avg.bash \
 						 $scratch_dir \
                                                  $casename \
                                                  $begin_yr_climo \
@@ -518,11 +518,11 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo
 
         #Ensuring a unique set of fields to condense for time series analysis
-        var_list_file=bash_scripts/var_list_enso_diags_time_series.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash
 
         ts_var_list_file= $log_dir/ts_var_list.bash
 
-        bash_scripts/generate_unique_field_list.bash $var_list_file \
+        ${coupled_diags_home}/bash_scripts/generate_unique_field_list.bash $var_list_file \
                                                    $ts_var_list_file
 
 
@@ -546,7 +546,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 fi
 
                 if [ $condense_field_ts -eq 1 ]; then
-                        bash_scripts/condense_field_bundle.bash $archive_dir_atm \
+                        ${coupled_diags_home}/bash_scripts/condense_field_bundle.bash $archive_dir_atm \
                                                                 $scratch_dir \
                                                                 $casename \
                                                                 $begin_yr_ts \
@@ -580,7 +580,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                         echo Interpolating time series files for $casename
                         echo Log files in $log_dir/remap_time_series_${casename}...
                         echo
-                        bash_scripts/remap_time_series_nco.bash $scratch_dir \
+                        ${coupled_diags_home}/bash_scripts/remap_time_series_nco.bash $scratch_dir \
                                                                 $casename \
                                                                 $begin_yr_ts \
                                                                 $end_yr_ts \
@@ -607,7 +607,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
 
         n_test_cases=$((n_cases-1))
 
-        var_list_file=bash_scripts/var_list_enso_diags_time_series.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash
 
         j=0
         while [ $j -lt $n_cases ]; do
@@ -622,7 +622,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 fi
 
 
-                bash_scripts/compute_indices.bash $archive_dir \
+                ${coupled_diags_home}/bash_scripts/compute_indices.bash $archive_dir \
                                                   $scratch_dir \
                                                   $casename \
                                                   $begin_yr_ts \
@@ -633,7 +633,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         done
 
 
-        var_list_file=bash_scripts/var_list_enso_diags_eqsoi_index.bash 
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_eqsoi_index.bash 
  
         j=0
         while [ $j -lt $n_cases ]; do
@@ -647,7 +647,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                         archive_dir=$scratch_dir
                 fi
 
-                bash_scripts/compute_eqsoi_index.bash $archive_dir \
+                ${coupled_diags_home}/bash_scripts/compute_eqsoi_index.bash $archive_dir \
 						      $scratch_dir \
 						      $casename \
 						      $begin_yr_ts \
@@ -664,7 +664,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Log files in $log_dir/ 
         echo 
  
-        var_list_file=bash_scripts/var_list_enso_diags_time_series.bash 
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash 
  
         j=0
         while [ $j -lt $n_test_cases ]; do
@@ -675,7 +675,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]} 
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
  
-                bash_scripts/plot_multiple_index_same_plot.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_multiple_index_same_plot.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \
@@ -705,7 +705,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_scratch_dir=${archive_dir_set[$n_cases-1]}
         fi
 
-        var_list_file=bash_scripts/var_list_enso_diags_nino_index.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_nino_index.bash
 
         j=0
         while [ $j -lt $n_test_cases ]; do
@@ -716,7 +716,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_enso_diags_time_series.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_enso_diags_time_series.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \
@@ -745,7 +745,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_enso_seasonality.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_enso_seasonality.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \
@@ -775,7 +775,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Log files in $log_dir/
         echo
 
-        var_list_file=bash_scripts/var_list_enso_diags_bjerknes_feedback.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_bjerknes_feedback.bash
 
         j=0
         while [ $j -lt $n_test_cases ]; do
@@ -786,7 +786,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_enso_feedbacks.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_enso_feedbacks.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \
@@ -822,7 +822,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Log files in $log_dir/
         echo
 
-        var_list_file=bash_scripts/var_list_enso_diags_heat_flux-sst_feedbacks.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_heat_flux-sst_feedbacks.bash
 
         j=0
         while [ $j -lt $n_test_cases ]; do
@@ -833,7 +833,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_enso_feedbacks.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_enso_feedbacks.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \
@@ -868,7 +868,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Log files in $log_dir/
         echo
 
-        var_list_file=bash_scripts/var_list_enso_diags_time_series.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash
 
         j=0
         while [ $j -lt $n_test_cases ]; do
@@ -879,7 +879,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_regr_nino34_fields.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_regr_nino34_fields.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \
@@ -904,7 +904,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Plotting std. dev. of fields over the Tropical Pacific
         echo Log files in $log_dir/
 
-        var_list_file=bash_scripts/var_list_enso_diags_time_series.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash
         reg='Greater_Tropical_Pacific'
 
         j=0
@@ -916,7 +916,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_stddev.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_stddev.bash $scratch_dir \
                                            $casename \
                                            $reg \
                                            $begin_yr_ts \
@@ -947,7 +947,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
         echo Log files in $log_dir/
         echo
 
-        var_list_file=bash_scripts/var_list_enso_diags_time_series.bash
+        var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash
 
         j=0
         while [ $j -lt $n_test_cases ]; do
@@ -958,7 +958,7 @@ if [ $generate_atm_enso_diags == 1 ]; then
                 ref_begin_yr_ts=${begin_yr_climateIndex_set[$n_cases-1]}
                 ref_end_yr_ts=${end_yr_climateIndex_set[$n_cases-1]}
 
-                bash_scripts/plot_enso_evolution.bash $scratch_dir \
+                ${coupled_diags_home}/bash_scripts/plot_enso_evolution.bash $scratch_dir \
                                                  $casename \
                                                  $begin_yr_ts \
                                                  $end_yr_ts \

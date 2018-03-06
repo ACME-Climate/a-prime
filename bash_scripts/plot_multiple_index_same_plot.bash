@@ -64,7 +64,7 @@ done
 
 # Generate plots for each field
 
-python python/plot_multiple_index_same_plot.py -d True --indir ${scratch_dir_index[@]} \
+python ${coupled_diags_home}/python/plot_multiple_index_same_plot.py -d True --indir ${scratch_dir_index[@]} \
 						-c ${casename_index[@]} \
 						-f ${field_names[@]} \
 						--begin_yr $begin_yr \

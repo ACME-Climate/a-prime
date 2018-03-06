@@ -38,7 +38,7 @@ while [ $i -lt ${#var_set[@]} ]; do
 	echo "file $outfile exists! Not condensing."
    else
 
-   ./bash_scripts/condense_field.bash $archive_dir \
+   ${coupled_diags_home}/bash_scripts/condense_field.bash $archive_dir \
                                       $scratch_dir \
                                       $casename \
                                       $var \

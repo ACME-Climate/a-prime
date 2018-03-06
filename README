@@ -1,7 +1,25 @@
 Python based scripts to generate ACME Coupled Priority Metrics 
 
 
-Basic pre-steps:
+Getting started using the conda package:
+
+   Create a new anaconda environment (requires having anaconda or
+   miniconda installed):
+     conda create -n a-prime -c e3sm python=2 a-prime
+     source activate a-prime
+   Copy the a-prime template run script (run_aprime.bash) to the
+   current directory:
+     get_aprime_template
+
+Getting started with an E3SM-Unified environment:
+
+   Load E3SM-Unified on the machine, e.g.:
+     module load e3sm-unified/1.1.3
+   Copy the a-prime template run script (run_aprime.bash) to the
+   current directory:
+     get_aprime_template
+     
+Getting started using GitHub repo:
 
    Clone ACME a-prime repository:
      git clone https://github.com/ACME-Climate/a-prime
@@ -22,16 +40,30 @@ About MPAS-Analysis:
 
 About conda and other environment issues:
 
-   The system is set up to load its own environment within the
-   driver, therefore the user needs to do *nothing* in that sense.
-   The acme-unified conda environment specific for a particular
-   machine is loaded properly inside run_aprime, and that includes
-   the updated version of nco.
+   The user needs to load an anaconda environment.  This
+   environment should include all dependencies of a-prime:
+     - python
+     - mpas_analysis ==0.7.0
+     - nco >=4.7.0
+     - numpy
+     - scipy
+     - matplotlib
+     - sympy
+     - netCDF4
 
-Supported machines as of September 2017:
+   The easiest way to do this is to use an environment where the
+   e3sm-unified (>= 1.1.3) or a-prime conda packages have been
+   installed.
+
+   Note: run_aprime.bash loaded an anaconda environment itself in
+   v 1.1 and earlier but this has been changed because a-prime is
+   now optionally *included* in the anaconda environment.
+
+Supported machines as of Mar 2018:
    1) edison/cori
    2) titan/rhea
    3) acme1/aims4
+   3) anvil/blues
 
 About batch mode:
 

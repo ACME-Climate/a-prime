@@ -16,9 +16,9 @@ ref_case=$6
 
 # Read in variable list for plotting climatologies  diagnostics
 if [ "$ref_case" == "obs" ]; then
-  source ./bash_scripts/var_list_time_series_model_vs_obs.bash
+  source ${coupled_diags_home}/bash_scripts/var_list_time_series_model_vs_obs.bash
 else
-  source ./bash_scripts/var_list_time_series_model_vs_model.bash
+  source ${coupled_diags_home}/bash_scripts/var_list_time_series_model_vs_model.bash
 fi
 
 n_var=${#var_set[@]}
@@ -47,7 +47,7 @@ while [ $k -lt $n_var ]; do
      ref_interp_method="$interp_method"
    fi
 
-   python python/plot_multiple_reg_seasonal_avg.py \
+   python ${coupled_diags_home}/python/plot_multiple_reg_seasonal_avg.py \
 			--indir $scratch_dir \
 			-c $casename \
 			-f $var \

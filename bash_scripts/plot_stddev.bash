@@ -57,7 +57,7 @@ for ((k=0; k<$n_var; k++)); do
                 season_name=${season_name_set[$i]}
 
 
-		python python/plot_stddev.py \
+		python ${coupled_diags_home}/python/plot_stddev.py \
 			--indir $scratch_dir \
 			-c $casename \
 			-f $var \

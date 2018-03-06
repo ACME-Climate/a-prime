@@ -44,7 +44,7 @@ for ((k=0; k<$n_var; k++)); do
 
 	fi
 
-	python python/compute_diff_index.py -d True 	--archive_dir $archive_dir \
+	python ${coupled_diags_home}/python/compute_diff_index.py -d True 	--archive_dir $archive_dir \
 							--indir $scratch_dir \
 							-c $case \
 							-f $var \

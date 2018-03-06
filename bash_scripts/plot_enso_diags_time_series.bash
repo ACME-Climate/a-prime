@@ -49,7 +49,7 @@ for ((k=0; k<$n_var; k++)); do
 		ref_interp_method=$interp_method
 	fi	
 
-	python python/plot_multiple_index.py -d True --indir $scratch_dir \
+	python ${coupled_diags_home}/python/plot_multiple_index.py -d True --indir $scratch_dir \
 							-c $casename \
 							-f $var \
 							--begin_yr $begin_yr \

@@ -65,7 +65,7 @@ for ((k=0; k<$n_var; k++)); do
 	end_month=11
 	season_name=ANN
 
-	python python/plot_regress_lead_lag_index_field.py -d True --indir $scratch_dir $scratch_dir\
+	python ${coupled_diags_home}/python/plot_regress_lead_lag_index_field.py -d True --indir $scratch_dir $scratch_dir\
 							-c $casename $casename\
 							-f $var $index_field\
 							--begin_yr $begin_yr \

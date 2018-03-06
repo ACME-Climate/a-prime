@@ -1,3 +1,0 @@
-[submodule "python/MPAS-Analysis"]
-	path = python/MPAS-Analysis
-	url = git@github.com:MPAS-Dev/MPAS-Analysis.git

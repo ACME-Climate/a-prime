@@ -18,10 +18,10 @@
 
 cd $PBS_O_WORKDIR
 
-./bash_scripts/aprime_atm_diags.bash
+${coupled_diags_home}/bash_scripts/aprime_atm_diags.bash
 
 echo
 echo "**** The following batch job will be submitted to cp files to www_dir *if* the atm diags are completed"
 echo "**** jobID:"
-batch_script="./bash_scripts/batch_update_wwwdir.$machname.bash"
+batch_script="${coupled_diags_home}/bash_scripts/batch_update_wwwdir.$machname.bash"
 qsub -W depend=afterok:$PBS_JOBID $batch_script

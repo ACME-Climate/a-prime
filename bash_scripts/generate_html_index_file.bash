@@ -103,9 +103,9 @@ EOF
 
   # Generating time series part of index.html file
   if [ "$ref_case" == "obs" ]; then
-    source $coupled_diags_home/bash_scripts/var_list_time_series_model_vs_obs.bash
+    source ${coupled_diags_home}/bash_scripts/var_list_time_series_model_vs_obs.bash
   else
-    source $coupled_diags_home/bash_scripts/var_list_time_series_model_vs_model.bash
+    source ${coupled_diags_home}/bash_scripts/var_list_time_series_model_vs_model.bash
   fi
 
   var_grp_unique_set=()
@@ -209,7 +209,7 @@ EOF
     if [ $generate_ohc_trends -eq 1 ]; then
       cat >> index.html << EOF
       <TR>
-        <TH ALIGN=LEFT><A HREF="OHCAnomaly_global_${casename}.png">Global OHC</a>
+        <TH ALIGN=LEFT><A HREF="ohcAnomaly_global_${casename}.png">Global OHC</a>
 EOF
     fi
     if [ $generate_seaice_trends -eq 1 ]; then
@@ -248,9 +248,9 @@ if [ $generate_atm_diags -eq 1 ]; then
 EOF
 
   if [ "$ref_case" == "obs" ]; then
-    source $coupled_diags_home/bash_scripts/var_list_climo_model_vs_obs.bash
+    source ${coupled_diags_home}/bash_scripts/var_list_climo_model_vs_obs.bash
   else
-    source $coupled_diags_home/bash_scripts/var_list_climo_model_vs_model.bash
+    source ${coupled_diags_home}/bash_scripts/var_list_climo_model_vs_model.bash
   fi
 
   var_grp_unique_set=()
@@ -546,7 +546,7 @@ EOF
       <TR>
         <TH ALIGN=LEFT><A HREF="SAnomalyZ_global_${casename}.png">S anomaly vs depth/time</a>
       <TR>
-        <TH ALIGN=LEFT><A HREF="OHCAnomalyZ_global_${casename}.png">OHC anomaly vs depth/time</a>
+        <TH ALIGN=LEFT><A HREF="ohcAnomalyZ_global_${casename}.png">OHC anomaly vs depth/time</a>
 EOF
     fi
     cat >> index.html << EOF
@@ -615,9 +615,9 @@ EOF
 
 
   if [ $ref_case == obs ]; then
-        source $coupled_diags_home/bash_scripts/var_list_enso_diags_climo.bash
+        source ${coupled_diags_home}/bash_scripts/var_list_enso_diags_climo.bash
   else
-        source $coupled_diags_home/bash_scripts/var_list_enso_diags_model_vs_model.bash
+        source ${coupled_diags_home}/bash_scripts/var_list_enso_diags_model_vs_model.bash
   fi
 
   var_grp_unique_set=()
@@ -709,12 +709,12 @@ EOF
 
 # Generating index.html section for Bjerkenes feedbacks plots
 
-  var_list_file=$coupled_diags_home/bash_scripts/var_list_enso_diags_bjerknes_feedback.bash
+  var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_bjerknes_feedback.bash
   source $var_list_file
 
   temp_unique_grp_list_file=$log_dir/temp_unique_grp_list_file.bash
 
-  bash $coupled_diags_home/bash_scripts/generate_unique_group_list.bash $var_list_file $temp_unique_grp_list_file
+  bash ${coupled_diags_home}/bash_scripts/generate_unique_group_list.bash $var_list_file $temp_unique_grp_list_file
 
   source $temp_unique_grp_list_file
 
@@ -783,12 +783,12 @@ EOF
 
 # Generating index.html section for ENSO heat flux-SST feedbacks plots
 
-  var_list_file=$coupled_diags_home/bash_scripts/var_list_enso_diags_heat_flux-sst_feedbacks.bash
+  var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_heat_flux-sst_feedbacks.bash
   source $var_list_file
 
   temp_unique_grp_list_file=$log_dir/temp_unique_grp_list_file.bash
 
-  bash $coupled_diags_home/bash_scripts/generate_unique_group_list.bash $var_list_file $temp_unique_grp_list_file
+  bash ${coupled_diags_home}/bash_scripts/generate_unique_group_list.bash $var_list_file $temp_unique_grp_list_file
 
   source $temp_unique_grp_list_file
 
@@ -857,12 +857,12 @@ EOF
 
 # Generating index.html section for std. dev. and ENSO Evolution Plots
 
-  var_list_file=$coupled_diags_home/bash_scripts/var_list_enso_diags_time_series.bash
+  var_list_file=${coupled_diags_home}/bash_scripts/var_list_enso_diags_time_series.bash
   source $var_list_file
 
   temp_unique_grp_list_file=$log_dir/temp_unique_grp_list_file.bash
 
-  bash $coupled_diags_home/bash_scripts/generate_unique_group_list.bash $var_list_file $temp_unique_grp_list_file
+  bash ${coupled_diags_home}/bash_scripts/generate_unique_group_list.bash $var_list_file $temp_unique_grp_list_file
 
   source $temp_unique_grp_list_file
 
@@ -1077,7 +1077,7 @@ EOF
 
 cp -u $coupled_diags_home/images/acme-banner_1.jpg $www_dir/$plots_dir_name
 mv index.html $www_dir/$plots_dir_name
-chmod -R a+rx $www_dir/$plots_dir_name
+chmod -R a+rX $www_dir/$plots_dir_name
 
 echo
 echo "Standalone HTML file with links to coupled diagnostic plots generated!"

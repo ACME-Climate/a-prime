@@ -43,7 +43,7 @@ if [ "$casename" != "obs" ]; then
 		echo "file $outfile exists! Not computing climatology."
 	else
 
-		python python/create_climatology.py --indir $scratch_dir \
+		python ${coupled_diags_home}/python/create_climatology.py --indir $scratch_dir \
 						    -c $casename \
 						    -f $var \
 						    --begin_month $begin_month \

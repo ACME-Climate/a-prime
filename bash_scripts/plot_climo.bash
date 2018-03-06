@@ -18,9 +18,9 @@ ref_end_yr=$8
 
 # Read in variable list for plotting climatologies  diagnostics
 if [ "$ref_case" == "obs" ]; then
-  source ./bash_scripts/var_list_climo_model_vs_obs.bash
+  source ${coupled_diags_home}/bash_scripts/var_list_climo_model_vs_obs.bash
 else
-  source ./bash_scripts/var_list_climo_model_vs_model.bash
+  source ${coupled_diags_home}/bash_scripts/var_list_climo_model_vs_model.bash
 fi
 
 n_var=${#var_set[@]}
@@ -58,7 +58,7 @@ while [ $k -lt $n_var ]; do
       season_name="${season_name_set[$ns]}"
 
       if [ "$var" == "TAU" ]; then
-        python python/plot_climo_vector.py \
+        python ${coupled_diags_home}/python/plot_climo_vector.py \
 			--indir $scratch_dir \
 			-c $casename \
 			-f $var \
@@ -83,7 +83,7 @@ while [ $k -lt $n_var ]; do
         fi
 
       else
-        python python/plot_climo.py \
+        python ${coupled_diags_home}/python/plot_climo.py \
 			--indir $scratch_dir \
 			-c $casename \
 			-f $var \
