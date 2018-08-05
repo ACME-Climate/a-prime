@@ -13,7 +13,7 @@
 #
 # Basic usage (also see README for specific instructions on running on different machines):
 #       1. Clone a-prime repository from github.com:
-#            git clone git@github.com:ACME-Climate/A-Prime a-prime
+#            git clone git@github.com:E3SM-Project/A-Prime a-prime
 #            cd a-prime
 #            git submodule update --init
 #       2. Download analysis input files

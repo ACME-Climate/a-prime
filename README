@@ -4,7 +4,7 @@ Python based scripts to generate ACME Coupled Priority Metrics
 Basic pre-steps:
 
    Clone ACME a-prime repository:
-     git clone https://github.com/ACME-Climate/a-prime
+     git clone https://github.com/E3SM-Project/a-prime
 
 About MPAS-Analysis:
 
